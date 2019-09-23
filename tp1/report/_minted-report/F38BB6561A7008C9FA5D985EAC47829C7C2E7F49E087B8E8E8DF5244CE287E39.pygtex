@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{upper\PYGZus{}bound}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,} \PYG{n}{N}\PYG{p}{,} \PYG{n}{mu}\PYG{p}{):}
+	\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{	Computes the upper bound of the confidence interval of mean mu}
+\PYG{l+s+sd}{	\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+	\PYG{k}{return} \PYG{n}{mu} \PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}\PYG{l+m+mi}{2} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)} \PYG{o}{/} \PYG{n}{N}\PYG{p}{)}
+
+\PYG{k}{def} \PYG{n+nf}{ucb\PYGZus{}policy}\PYG{p}{(}\PYG{n}{click\PYGZus{}rates}\PYG{p}{):}
+	\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{	Return the trajectory followed by the agent using ucb policy.}
+\PYG{l+s+sd}{	\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+	
+	\PYG{c+c1}{\PYGZsh{} Cumulative reward got by each actions}
+	\PYG{n}{histo} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}\PYG{n}{click\PYGZus{}rates}\PYG{p}{[}\PYG{n}{i}\PYG{p}{][}\PYG{n}{i}\PYG{p}{]} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)])}
+	
+	\PYG{c+c1}{\PYGZsh{} Number of times we took each action}
+	\PYG{n}{counter} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+
+	\PYG{c+c1}{\PYGZsh{} List of the taken action}
+	\PYG{n}{action\PYGZus{}list} \PYG{o}{=} \PYG{p}{[}\PYG{n}{i} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+
+	\PYG{k}{for} \PYG{n}{t} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{,} \PYG{l+m+mi}{5000}\PYG{p}{):}
+		\PYG{n}{action} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{([}\PYG{n}{upper\PYGZus{}bound}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,} \PYG{n}{counter}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{histo}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{/} \PYG{n}{counter}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+			\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)])}
+		\PYG{n}{counter}\PYG{p}{[}\PYG{n}{action}\PYG{p}{]} \PYG{o}{+=} \PYG{l+m+mi}{1}
+		\PYG{n}{histo}\PYG{p}{[}\PYG{n}{action}\PYG{p}{]} \PYG{o}{+=} \PYG{n}{click\PYGZus{}rates}\PYG{p}{[}\PYG{n}{t}\PYG{p}{][}\PYG{n}{action}\PYG{p}{]}
+
+		\PYG{n}{action\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{action}\PYG{p}{)}
+	\PYG{k}{return} \PYG{n}{action\PYGZus{}list}
+\end{Verbatim}
