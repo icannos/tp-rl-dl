@@ -1,0 +1,6 @@
+
+(java:20010): Gtk-WARNING **: 19:16:20.103: Impossible de trouver le moteur de thème dans module_path : « adwaita »
+sept. 23, 2019 7:16:24 PM java.util.prefs.FileSystemPreferences$1 run
+INFO: Created user preferences directory.
+sept. 23, 2019 7:16:24 PM java.util.prefs.FileSystemPreferences$6 run
+WARNING: Prefs file removed in background /home/maxime/.java/.userPrefs/prefs.xml

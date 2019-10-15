@@ -54,7 +54,7 @@ class IterPolicyAgent():
         policy = np.zeros(max(self.states) + 1)
         self.policy = np.zeros(max(self.states) + 1)
 
-        while True
+        while True:
             V = np.random.uniform(-5, 5, max(self.states) + 1)
 
             while True:
