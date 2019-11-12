@@ -10,8 +10,6 @@ import copy
 from deepqlearning import DeepQAgent
 
 if __name__ == '__main__':
-
-
     env = gym.make('CartPole-v1')
 
     # Enregistrement de l'Agent
@@ -30,14 +28,16 @@ if __name__ == '__main__':
 
     for i in range(episode_count):
         obs = envm.reset()
-        env.verbose = (i % 100 == 0 and i > 0)  # afficher 1 episode sur 100
+        env.verbose = (i % 1000 == 0 and i > 0)  # afficher 1 episode sur 100
         if env.verbose:
             env.render()
         j = 0
         rsum = 0
         while True:
-            action = agent.act(obs, reward, done)
-            obs, reward, done, _ = envm.step(action)
+            action = agent.act(obs, exploration=True)
+            next_obs, reward, done, _ = envm.step(action)
+            agent.store(obs, action, reward, next_obs, done)
+            obs = next_obs
             rsum += reward
             j += 1
             if env.verbose:
@@ -45,6 +45,9 @@ if __name__ == '__main__':
             if done:
                 print("Episode : " + str(i) + " rsum=" + str(rsum) + ", " + str(j) + " actions")
                 break
+
+        if i >= 20:
+            agent.experience_replay(epoch=5)
 
     print("done")
     env.close()
