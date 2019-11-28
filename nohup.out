@@ -4,3 +4,136 @@ sept. 23, 2019 7:16:24 PM java.util.prefs.FileSystemPreferences$1 run
 INFO: Created user preferences directory.
 sept. 23, 2019 7:16:24 PM java.util.prefs.FileSystemPreferences$6 run
 WARNING: Prefs file removed in background /home/maxime/.java/.userPrefs/prefs.xml
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.intellij.ide.ClassUtilCore to field sun.net.www.protocol.jar.JarFileFactory.fileCache
+WARNING: Please consider reporting this to the maintainers of com.intellij.ide.ClassUtilCore
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2019-11-10 15:37:01,689 [   6110]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;../tp-rl-dl/tp2 
+2019-11-10 15:37:01,691 [   6112]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-10 15:38:21,301 [  85722]   WARN - minal.model.TerminalTextBuffer - Terminal height < screen buffer line count: 24 < 25 
+2019-11-10 15:40:49,293 [ 233714]   WARN - j.openapi.wm.impl.IdeFrameImpl - Set preferredFocusableComponent in 'DQL_Cartpole' content in Run tool window to avoid focus-related problems. 
+2019-11-10 15:40:49,294 [ 233715]   WARN - j.openapi.wm.impl.IdeFrameImpl - DQL_Cartpole tool window - parent container is hidden 
+2019-11-10 15:45:00,942 [ 485363]   WARN - j.openapi.wm.impl.IdeFrameImpl - Set preferredFocusableComponent in 'DQL_Cartpole' content in Run tool window to avoid focus-related problems. 
+2019-11-10 15:45:00,942 [ 485363]   WARN - j.openapi.wm.impl.IdeFrameImpl - DQL_Cartpole tool window - parent container is hidden 
+2019-11-12 09:58:18,724 [152483145]   WARN - j.openapi.wm.impl.IdeFrameImpl - Set preferredFocusableComponent in 'arena_a2c' content in Run tool window to avoid focus-related problems. 
+2019-11-12 09:58:19,048 [152483469]   WARN - j.openapi.wm.impl.IdeFrameImpl - arena_a2c tool window - parent container is hidden 
+2019-11-12 10:18:53,778 [153718199]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-12 10:18:53,780 [153718201]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;git 
+2019-11-12 10:18:54,151 [153718572]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;../tp-rl-dl/tp2 
+2019-11-12 10:18:54,216 [153718637]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-12 10:19:04,758 [153729179]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-12 10:19:04,759 [153729180]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;git 
+2019-11-12 10:19:05,280 [153729701]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;../tp-rl-dl/tp2 
+2019-11-12 10:19:05,304 [153729725]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-12 10:19:06,928 [153731349]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-12 10:19:06,929 [153731350]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;git 
+2019-11-12 10:19:12,917 [153737338]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;../tp-rl-dl/tp2 
+2019-11-12 10:19:12,947 [153737368]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-12 11:13:07,490 [156971911]   WARN - tartup.impl.StartupManagerImpl - /run/media/maxime/Documents/_musique/pydownload/.idea 
+java.io.FileNotFoundException: /run/media/maxime/Documents/_musique/pydownload/.idea
+	at com.intellij.openapi.util.io.FileUtil.isFileSystemCaseSensitive(FileUtil.java:1467)
+	at com.intellij.ide.startup.impl.StartupManagerImpl.checkFsSanity(StartupManagerImpl.java:329)
+	at com.intellij.ide.startup.impl.StartupManagerImpl.runPostStartupActivities(StartupManagerImpl.java:237)
+	at com.intellij.openapi.project.impl.ProjectManagerImpl.lambda$null$6(ProjectManagerImpl.java:411)
+	at com.intellij.openapi.application.TransactionGuardImpl$2.run(TransactionGuardImpl.java:312)
+	at com.intellij.openapi.application.impl.LaterInvocator$FlushQueue.doRun(LaterInvocator.java:433)
+	at com.intellij.openapi.application.impl.LaterInvocator$FlushQueue.runNextEvent(LaterInvocator.java:416)
+	at com.intellij.openapi.application.impl.LaterInvocator$FlushQueue.run(LaterInvocator.java:399)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:313)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:770)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:721)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:715)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:85)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:740)
+	at com.intellij.ide.IdeEventQueue.defaultDispatchEvent(IdeEventQueue.java:824)
+	at com.intellij.ide.IdeEventQueue._dispatchEvent(IdeEventQueue.java:773)
+	at com.intellij.ide.IdeEventQueue.lambda$dispatchEvent$8(IdeEventQueue.java:412)
+	at com.intellij.openapi.progress.impl.CoreProgressManager.computePrioritized(CoreProgressManager.java:704)
+	at com.intellij.ide.IdeEventQueue.dispatchEvent(IdeEventQueue.java:411)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2019-11-12 11:13:20,025 [156984446]   WARN - llij.ide.plugins.PluginManager - Task Management not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 11:13:20,025 [156984446]   WARN - llij.ide.plugins.PluginManager - Gherkin not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 11:13:20,026 [156984447]   WARN - llij.ide.plugins.PluginManager - Socket Client not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 11:13:20,026 [156984447]   WARN - llij.ide.plugins.PluginManager - Settings Repository not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 14:52:43,795 [170148216]   WARN - llij.ide.plugins.PluginManager - Task Management not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 14:52:44,114 [170148535]   WARN - llij.ide.plugins.PluginManager - Gherkin not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 14:52:44,115 [170148536]   WARN - llij.ide.plugins.PluginManager - Socket Client not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-12 14:52:44,116 [170148537]   WARN - llij.ide.plugins.PluginManager - Settings Repository not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-13 14:49:13,586 [256338007]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 14:49:13,601 [256338022]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 14:52:45,639 [256550060]   WARN - llij.ide.plugins.PluginManager - Task Management not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-13 14:52:45,640 [256550061]   WARN - llij.ide.plugins.PluginManager - Gherkin not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-13 14:52:45,640 [256550061]   WARN - llij.ide.plugins.PluginManager - Socket Client not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-13 14:52:45,640 [256550061]   WARN - llij.ide.plugins.PluginManager - Settings Repository not loaded: since build 192.7142 > PC-192.6817.19 
+2019-11-13 14:56:33,879 [256778300]   WARN - j.openapi.wm.impl.IdeFrameImpl - Set preferredFocusableComponent in 'split_dataset' content in Run tool window to avoid focus-related problems. 
+2019-11-13 14:56:33,880 [256778301]   WARN - j.openapi.wm.impl.IdeFrameImpl - split_dataset tool window - parent container is hidden 
+2019-11-13 15:10:46,230 [257630651]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:10:46,549 [257630970]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2019-11-13 15:11:29,257 [257673678]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:11:29,287 [257673708]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 15:11:29,429 [257673850]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:11:29,430 [257673851]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:11:29,462 [257673883]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 15:11:29,620 [257674041]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:11:29,622 [257674043]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:11:29,654 [257674075]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 15:11:42,945 [257687366]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:11:42,946 [257687367]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2019-11-13 15:13:31,408 [257795829]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:13:31,423 [257795844]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 15:14:06,205 [257830626]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:14:06,206 [257830627]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2019-11-13 15:14:22,728 [257847149]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:14:22,750 [257847171]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2019-11-13 15:14:29,388 [257853809]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2019-11-13 15:14:29,389 [257853810]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2019-11-13 15:18:16,136 [258080557]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..l/fireservice 
+2019-11-13 15:18:16,487 [258080908]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
