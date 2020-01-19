@@ -53,7 +53,8 @@ class stochasticPolicyNN(nn.Module):
 
 
 class a2cAgent:
-    def __init__(self, input_space, action_space, gamma=0.9, alpha=self.alpha):
+    def __init__(self, input_space, action_space, gamma=0.99, alpha=1, learning_rate=0.001):
+        self.learning_rate = learning_rate
         self.alpha = alpha
         self.gamma = gamma
         self.input_space = input_space
@@ -65,8 +66,8 @@ class a2cAgent:
         self.policy = stochasticPolicyNN(input_dim=input_space, output_dim=action_space, layers=[16, 16])
 
 
-        self.V_optimizer = Adam(params=self.V.parameters())
-        self.policy_optimizer = Adam(params=self.policy.parameters())
+        self.V_optimizer = Adam(params=self.V.parameters(), lr=self.learning_rate)
+        self.policy_optimizer = Adam(params=self.policy.parameters(), lr=0.001)
 
     def act(self, obs):
         return np.random.choice(self.action_space, p=self.policy(obs).detach().numpy())
@@ -102,8 +103,16 @@ class a2cAgent:
 
         self.update_value_function(X, Y)
 
-        for state, action, reward, next_state, done in traj:
-            self.update_policy(state, action, reward, next_state)
+        self.policy.zero_grad()
+
+        logpi = - sum(torch.log(self.policy(state)[action]) * self.advantage_function(reward, state, next_state)
+                    for state, action, reward, next_state, done in traj) / len(traj)
+
+        logpi.backward()
+
+        self.policy_optimizer.step()
+        self.policy_optimizer.zero_grad()
+        self.policy.zero_grad()
 
     def update_policy(self, state, action, reward, next_state):
         self.policy.zero_grad()

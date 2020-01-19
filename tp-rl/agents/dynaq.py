@@ -7,7 +7,7 @@ from scipy.special import softmax
 
 
 class dynaQAgent():
-    def __init__(self, state_dict, states, actions, exploration_min=0.05, exploration_rate=1, exploration_decay=0.99, k=4):
+    def __init__(self, state_dict, states, actions, exploration_min=0, exploration_rate=1, exploration_decay=0.99, k=1):
         self.exploration_min = exploration_min
         self.k = k
         self.exploration_decay = exploration_decay
@@ -38,7 +38,7 @@ class dynaQAgent():
 
         self.P = softmax(self.P)
 
-        states = list(statedic.values())
+        states = list(self.state_dict.values())
 
         s = list(np.random.choice(states, self.k))
         a = list(np.random.choice(self.actions, self.k))

@@ -25,6 +25,7 @@ if __name__ == '__main__':
 
     # Faire un fichier de log sur plusieurs scenarios
     outdir = f'gridworld-v0/{plan}-iter-policy-agent'
+
     envm = wrappers.Monitor(env, directory=outdir, force=True, video_callable=False)
     env.setPlan(f"gridworldPlans/{plan}.txt", {0: -0.001, 3: 1, 4: 1, 5: -1, 6: -1})
     env.seed()  # Initialiser le pseudo aleatoire
@@ -35,7 +36,7 @@ if __name__ == '__main__':
     for i in range(episode_count):
         obs = envm.reset()
         env.verbose = (i % 100 == 0 and i > 0)  # afficher 1 episode sur 100
-        env.render(0.1)
+        #env.render(0.1)
         j = 0
         rsum = 0
         while True:
@@ -43,7 +44,7 @@ if __name__ == '__main__':
             obs, reward, done, _ = envm.step(action)
             rsum += reward
             j += 1
-            env.render()
+            #env.render()
             if done:
                 print("Episode : " + str(i) + " rsum=" + str(rsum) + ", " + str(j) + " actions")
                 break

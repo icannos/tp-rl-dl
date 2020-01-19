@@ -4,7 +4,7 @@ from torch.optim import sgd, Adam
 from collections import deque
 import numpy as np
 import random
-
+from copy import copy
 
 class NN(nn.Module):
     def __init__(self, input_dim, output_dim, layers=[]):
@@ -28,12 +28,24 @@ class NN(nn.Module):
 
         return x
 
+def weights_init_uniform_rule(m):
+    classname = m.__class__.__name__
+    # for every Linear layer in a model..
+    if classname.find('Linear') != -1:
+        # get the number of the inputs
+        n = m.in_features
+        y = 1.0 / np.sqrt(n)
+        m.weight.data.uniform_(-y, y)
+        m.bias.data.fill_(0)
+
 
 class DeepQAgent:
-    def __init__(self, state_dim, action_space, exploration_rate=1, exploration_decay=0.999, exploration_min=0.05,
-                 learning_rate=0.01, batch_size=64, gamma=0.9, target_network=False):
+    def __init__(self, state_dim, action_space, exploration_rate=1, exploration_decay=0.99, exploration_min=0.05,
+                 learning_rate=0.01, batch_size=64, gamma=0.9, tau=False, alpha=0.2):
 
-        self.target_network = target_network
+
+        self.alpha = alpha
+        self.tau = tau
         self.gamma = gamma
         self.batch_size = batch_size
         self.learning_rate = learning_rate
@@ -42,13 +54,15 @@ class DeepQAgent:
         self.exploration_min = exploration_min
         self.exploration_decay = exploration_decay
         self.exploration_rate = exploration_rate
-        self._memory = deque([], maxlen=1000)
+        self._memory = deque([], maxlen=500)
 
-        self.Q = NN(self.state_dim, self.action_space, [16, 16, 16])
-        self.Q_target = NN(self.state_dim, self.action_space, [64, 16])
+        self.Q = NN(self.state_dim, self.action_space, [16, 16])
+        self.Q_target = NN(self.state_dim, self.action_space, [16, 16])
 
-        self.Q_optimizer = Adam(params=list(self.Q.parameters()), lr=0.001)
-        self.Qtarget_optimizer = Adam(params=list(self.Q_target.parameters()))
+        self.Q.apply(weights_init_uniform_rule)
+        self.Q_target.apply(weights_init_uniform_rule)
+
+        self.Q_optimizer = Adam(params=list(self.Q.parameters()), lr=learning_rate)
 
     def store(self, state, action, reward, next_state, done):
         self._memory.append((state, action, reward, next_state, done))
@@ -72,22 +86,33 @@ class DeepQAgent:
         X = []
         Y = []
 
-        if self.target_network:
-            Q = self.Q
-        else:
+        if self.tau:
             Q = self.Q_target
+        else:
+            Q = self.Q
 
         for state, action, reward, next_sate, done in batch:
             y = self.Q(state).detach().numpy()
             if not done:
-                y[action] = y[action] * 0.8 + 0.2 * (reward + self.gamma * np.max(Q(next_sate).detach().numpy()))
+                y[action] = y[action] * self.alpha + (1-self.alpha) * (reward + self.gamma * np.max(Q(next_sate).detach().numpy()))
             else:
-                y[action] = y[action] * 0.5 + 0.5 * reward
+                y[action] = y[action] * self.alpha + (1-self.alpha) * reward
 
             X.append(state)
             Y.append(y)
 
         return X, Y
+
+    def updateQ(self, obs, action, reward, next_obs, done, update_target=False):
+        batch = [(obs, action, reward, next_obs, done)]
+        X, Y = self.build_target(batch)
+
+        self.optimization_step(torch.Tensor(X), torch.Tensor(Y))
+
+        if update_target and self.tau:
+            self.update_targets()
+
+        self.exploration_rate = max(self.exploration_decay * self.exploration_rate, self.exploration_min)
 
     def experience_replay(self, epoch=5, update_target = True):
         for _ in range(epoch):
@@ -96,8 +121,26 @@ class DeepQAgent:
 
             self.optimization_step(torch.Tensor(X), torch.Tensor(Y))
 
-        if update_target and self.target_network:
-            self.Q_target.load_state_dict(self.Q.state_dict())
-            self.Q_target.eval()
+        if update_target and self.tau:
+            self.update_targets()
 
         self.exploration_rate = max(self.exploration_decay * self.exploration_rate, self.exploration_min)
+
+    def update_target(self, curr, target):
+        for k, v in target.items():
+            curr[k] = (1 - self.tau) * curr[k] + self.tau * target[k]
+
+        return curr
+
+    def equalize_networks(self):
+        self.Q.load_state_dict(self.Q_target.state_dict())
+
+
+    def update_targets(self):
+        curr = copy(self.Q.state_dict())
+        T = copy(self.Q_target.state_dict())
+
+        updated_V = self.update_target(curr, T)
+
+        self.Q_target.load_state_dict(updated_V)
+
