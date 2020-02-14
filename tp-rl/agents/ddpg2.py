@@ -61,7 +61,7 @@ class continuousPolicyNN(nn.Module):
 
 
 class ddpgAgent:
-    def __init__(self, input_space, action_space, gamma=0.999, tau=0.9, memsize=1000):
+    def __init__(self, input_space, action_space, gamma=0.999, tau=0.9, memsize=1000000):
         self.memsize = memsize
         self.tau = tau
         self.gamma = gamma
@@ -72,8 +72,8 @@ class ddpgAgent:
 
         self._value_loss = nn.SmoothL1Loss(reduction="mean")
 
-        self.V = ValueNN(input_dim=input_space[0] + action_space, output_dim=1, layers=[128, 128])
-        self.V_target = ValueNN(input_dim=input_space[0] + action_space, output_dim=1, layers=[128, 128])
+        self.V = ValueNN(input_dim=input_space[0] + action_space, output_dim=1, layers=[128, 128, 128])
+        self.V_target = ValueNN(input_dim=input_space[0] + action_space, output_dim=1, layers=[128,128, 128])
 
         self.policy = continuousPolicyNN(input_dim=input_space, output_dim=action_space, layers=[128, 128])
         self.policy_target = continuousPolicyNN(input_dim=input_space, output_dim=action_space, layers=[128, 128])

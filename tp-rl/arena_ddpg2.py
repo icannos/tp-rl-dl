@@ -16,8 +16,8 @@ game = "LunarLanderContinuous-v2"
 
 episode_count = 1000000
 
-batch_size = 16
-steps = 5
+batch_size = 1000
+steps = 1
 
 
 exploration_rate = 0.1
@@ -25,14 +25,14 @@ exploration_rate = 0.1
 from agents.ddpg2 import ddpgAgent
 
 
-# torch.set_default_tensor_type('torch.cuda.FloatTensor')
+torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
 if __name__ == '__main__':
     env = gym.make(game)
 
     # Enregistrement de l'Agent
     agent = ddpgAgent(env.observation_space.shape, env.action_space.shape[0],
-                      gamma=0.99, tau=0.9, memsize=batch_size+100)
+                      gamma=0.95, tau=0.01, memsize=batch_size+1000000)
 
     agent.equalize_networks()
 
@@ -75,10 +75,10 @@ if __name__ == '__main__':
                 print("Episode : " + str(i) + " rsum=" + str(rsum) + ", " + str(j) + " actions")
                 break
 
-        if len(agent._memory) > batch_size:
-            for _ in range(steps):
-                agent.update(batch_size)
-                agent.update_targets()
+            if len(agent._memory) > batch_size:
+                for _ in range(steps):
+                    agent.update(batch_size)
+                    agent.update_targets()
 
         obs = envm.reset()
         rsum = 0
