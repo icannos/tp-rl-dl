@@ -137,3 +137,51 @@ bytes read                    :ESC[
 2019-11-13 15:18:16,487 [258080908]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
 parsed                        :ESC[?2004h
 bytes read                    :ESC[ 
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2020-01-10 14:38:24,543 [   4200]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: VibrantInk from plugin: com.intellij.database 
+2020-01-10 14:38:24,543 [   4200]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: WarmNeon from plugin: com.intellij.database 
+2020-01-10 14:38:24,543 [   4200]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: High сontrast from plugin: com.intellij.database 
+2020-01-10 14:52:18,204 [ 837861]   WARN - .impl.LineStatusTrackerManager - Tracker release underflow by com.intellij.openapi.editor.impl.EditorImpl@1029263a 
+OpenJDK 64-Bit Server VM warning: Option UseConcMarkSweepGC was deprecated in version 9.0 and will likely be removed in a future release.
+2020-01-10 14:52:37,953 [   3968]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: VibrantInk from plugin: com.intellij.database 
+2020-01-10 14:52:37,953 [   3968]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: WarmNeon from plugin: com.intellij.database 
+2020-01-10 14:52:37,954 [   3969]   WARN - s.impl.EditorColorsManagerImpl - Cannot find scheme: High сontrast from plugin: com.intellij.database 
+2020-01-11 11:22:13,875 [73779890]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..p-rl-dl/tp-rl 
+2020-01-11 11:22:14,045 [73780060]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2020-01-11 11:22:22,509 [73788524]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2020-01-11 11:22:22,510 [73788525]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2020-01-11 11:58:32,629 [75958644]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..p-rl-dl/tp-rl 
+2020-01-11 11:58:32,663 [75958678]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2020-01-11 12:00:03,988 [76050003]   WARN - j.openapi.wm.impl.IdeFrameImpl - Set preferredFocusableComponent in 'arena_dql' content in Run tool window to avoid focus-related problems. 
+2020-01-11 12:00:03,989 [76050004]   WARN - j.openapi.wm.impl.IdeFrameImpl - arena_dql tool window - parent container is hidden 
+2020-01-11 12:00:18,471 [76064486]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2020-01-11 12:00:18,472 [76064487]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2020-01-11 12:32:50,426 [78016441]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..p-rl-dl/tp-rl 
+2020-01-11 12:32:50,508 [78016523]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2020-01-11 12:40:49,260 [78495275]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2020-01-11 12:40:49,260 [78495275]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2020-01-11 13:06:52,340 [80058355]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..p-rl-dl/tp-rl 
+2020-01-11 13:06:52,370 [80058385]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2020-01-11 15:06:54,837 [87260852]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004l
+bytes read                    :ESC[ 
+2020-01-11 15:06:54,837 [87260852]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;optirun 
+2020-01-11 16:23:33,347 [91859362]  ERROR - terminal.emulator.JediEmulator - Error processing OSC 1;..p-rl-dl/tp-rl 
+2020-01-11 16:23:33,429 [91859444]  ERROR - terminal.emulator.JediEmulator - Unhandled Control sequence
+parsed                        :ESC[?2004h
+bytes read                    :ESC[ 
+2020-01-12 09:15:11,998 [152558013]   WARN - pl.local.NativeFileWatcherImpl - Watcher terminated with exit code 143 

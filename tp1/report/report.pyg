@@ -1,0 +1,28 @@
+def linucb_policy(alpha, articles, click_rates):
+^^IA = [np.identity(5, dtype=float) for i in range(10)]
+^^Ib = [np.zeros((5, 1), dtype=float) for i in range(10)]
+
+^^Itheta = [None for i in range(10)]
+^^Ipt = [None for i in range(10)]
+
+^^Iactions_list = []
+
+^^Ifor t in range(0, 5000):
+^^I^^Ifor i in range(10):
+^^I^^I^^Itheta[i] = np.dot(np.linalg.inv(A[i]), b[i])
+
+^^I^^I^^Ipt[i] = (np.dot(np.transpose(theta[i]),  articles[t]) + alpha * np.sqrt(
+^^I^^I^^Inp.dot(
+^^I^^I^^I^^Inp.dot(np.transpose(articles[t]),
+^^I^^I^^I^^I^^I^^Inp.linalg.inv(A[i])),
+^^I^^I^^I^^Iarticles[t])))[0]
+
+^^I^^Iat = np.argmax(pt)
+^^I^^Irt = click_rates[t][at]
+
+^^I^^IA[at] = A[at] + np.dot(np.transpose(articles[t]), articles[t])
+^^I^^Ib[at] = b[at] + rt * articles[t]
+
+^^I^^Iactions_list.append(at)
+
+^^Ireturn actions_list
