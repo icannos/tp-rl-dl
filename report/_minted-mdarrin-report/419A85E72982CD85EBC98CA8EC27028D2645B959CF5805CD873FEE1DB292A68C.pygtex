@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{linucb\PYGZus{}policy}\PYG{p}{(}\PYG{n}{alpha}\PYG{p}{,} \PYG{n}{articles}\PYG{p}{,} \PYG{n}{click\PYGZus{}rates}\PYG{p}{):}
+	\PYG{n}{A} \PYG{o}{=} \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{identity}\PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{dtype}\PYG{o}{=}\PYG{n+nb}{float}\PYG{p}{)} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+	\PYG{n}{b} \PYG{o}{=} \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{((}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{dtype}\PYG{o}{=}\PYG{n+nb}{float}\PYG{p}{)} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+
+	\PYG{n}{theta} \PYG{o}{=} \PYG{p}{[}\PYG{k+kc}{None} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+	\PYG{n}{pt} \PYG{o}{=} \PYG{p}{[}\PYG{k+kc}{None} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)]}
+
+	\PYG{n}{actions\PYGZus{}list} \PYG{o}{=} \PYG{p}{[]}
+
+	\PYG{k}{for} \PYG{n}{t} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{l+m+mi}{5000}\PYG{p}{):}
+		\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{):}
+			\PYG{n}{theta}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{inv}\PYG{p}{(}\PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]),} \PYG{n}{b}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])}
+
+			\PYG{n}{pt}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{n}{theta}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]),}  \PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{])} \PYG{o}{+} \PYG{n}{alpha} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sqrt}\PYG{p}{(}
+			\PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}
+				\PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{]),}
+						\PYG{n}{np}\PYG{o}{.}\PYG{n}{linalg}\PYG{o}{.}\PYG{n}{inv}\PYG{p}{(}\PYG{n}{A}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])),}
+				\PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{])))[}\PYG{l+m+mi}{0}\PYG{p}{]}
+
+		\PYG{n}{at} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{(}\PYG{n}{pt}\PYG{p}{)}
+		\PYG{n}{rt} \PYG{o}{=} \PYG{n}{click\PYGZus{}rates}\PYG{p}{[}\PYG{n}{t}\PYG{p}{][}\PYG{n}{at}\PYG{p}{]}
+
+		\PYG{n}{A}\PYG{p}{[}\PYG{n}{at}\PYG{p}{]} \PYG{o}{=} \PYG{n}{A}\PYG{p}{[}\PYG{n}{at}\PYG{p}{]} \PYG{o}{+} \PYG{n}{np}\PYG{o}{.}\PYG{n}{dot}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{transpose}\PYG{p}{(}\PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{]),} \PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{])}
+		\PYG{n}{b}\PYG{p}{[}\PYG{n}{at}\PYG{p}{]} \PYG{o}{=} \PYG{n}{b}\PYG{p}{[}\PYG{n}{at}\PYG{p}{]} \PYG{o}{+} \PYG{n}{rt} \PYG{o}{*} \PYG{n}{articles}\PYG{p}{[}\PYG{n}{t}\PYG{p}{]}
+
+		\PYG{n}{actions\PYGZus{}list}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{at}\PYG{p}{)}
+
+	\PYG{k}{return} \PYG{n}{actions\PYGZus{}list}
+\end{Verbatim}

@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{TP 1 \205 Bandits multi-bras}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Baselines}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{UCB}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{LinUCB}{section.1}% 4
+\BOOKMARK [1][-]{section.2}{TP 2 \205 Programmation dynamique}{}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Policy Iteration}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.2}{Value Iteration}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{TP 3 \205 Q Learning}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{SARSA}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Dyna Q}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{TP 4 \205 Deep Q Learning}{}% 11
+\BOOKMARK [1][-]{section.5}{TP 5 \205 Policy Gradient}{}% 12
+\BOOKMARK [1][-]{section.6}{TP 6 \205 PPO}{}% 13
+\BOOKMARK [1][-]{section.7}{TP 7 \205 DDPG}{}% 14
+\BOOKMARK [1][-]{section.8}{TP 8 \205 MADDPG}{}% 15
+\BOOKMARK [1][-]{section.9}{TP 9 \205 Generative Adversarial Networks}{}% 16
+\BOOKMARK [1][-]{section.10}{TP 10 \205 Variational Autoencoders}{}% 17

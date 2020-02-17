@@ -1,0 +1,9 @@
+\documentclass{standalone}
+
+\begin{document}
+	On se rend rapidement compte qu'appliquer les méthodes usuels au cas multi agent ne fonctionne pas. Cela s'explique par le fait que lors de l'entraînement on a besoin de la propriété de markov sur les états. Or on perd cette propriété lorsqu'il y a plusieurs agents pour chaque agent. En effet, l'état suivant ne dépend pas seulement de ce que voit l'agent lui même et de ses actions mais aussi des actions prises par les autres agents.
+	
+	On règle ce problème en passant à la critique les informations sur tous les agents pendant l'entraînement. On peut ensuite utiliser les agents en phase de production sans les critiques (et donc sans l'aspect omniscient).
+	
+	Je n'ai pas réussi à obtenir de résultats corrects (d'autant que depuis quelques màj la librairie a cessé de fonctionner.)
+\end{document}

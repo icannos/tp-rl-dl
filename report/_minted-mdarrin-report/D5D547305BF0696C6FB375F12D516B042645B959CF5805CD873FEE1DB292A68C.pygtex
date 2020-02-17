@@ -1,0 +1,31 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+        \PYG{n}{policy} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{randint}\PYG{p}{(}\PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{,} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}
+
+        \PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
+            \PYG{n}{V} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{uniform}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n+nb}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{)}
+
+            \PYG{k}{while} \PYG{k+kc}{True}\PYG{p}{:}
+                \PYG{n}{Vprev} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{copy}\PYG{p}{(}\PYG{n}{V}\PYG{p}{)}
+                \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{:}
+                    \PYG{n}{V}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]} \PYG{o}{=} \PYG{n+nb}{sum}\PYG{p}{([}\PYG{n}{p} \PYG{o}{*} \PYG{p}{(}\PYG{n}{r} \PYG{o}{+} \PYG{n}{gamma} \PYG{o}{*} \PYG{n}{Vprev}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{state\PYGZus{}dict}\PYG{p}{[}\PYG{n}{sp}\PYG{p}{]])}
+		    		\PYG{k}{for} \PYG{n}{p}\PYG{p}{,} \PYG{n}{sp}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{][}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]]])}
+
+                \PYG{n}{err} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{sum}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{fabs}\PYG{p}{(}\PYG{n}{Vprev} \PYG{o}{\PYGZhy{}} \PYG{n}{V}\PYG{p}{))}
+                \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{err}\PYG{p}{)}
+                \PYG{k}{if} \PYG{n}{err} \PYG{o}{\PYGZlt{}=} \PYG{n}{eps}\PYG{p}{:}
+                    \PYG{k}{break}
+
+            \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{:}
+                \PYG{n}{policy}\PYG{p}{[}\PYG{n}{s}\PYG{p}{]} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{argmax}\PYG{p}{([}\PYG{n+nb}{sum}\PYG{p}{([}\PYG{n}{p} \PYG{o}{*} \PYG{p}{(}\PYG{n}{r} \PYG{o}{+} \PYG{n}{gamma} \PYG{o}{*} \PYG{n}{V}\PYG{p}{[}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{state\PYGZus{}dict}\PYG{p}{[}\PYG{n}{sp}\PYG{p}{]])}
+                                                \PYG{k}{for} \PYG{n}{p}\PYG{p}{,} \PYG{n}{sp}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{][}\PYG{n}{a}\PYG{p}{]])}
+                                            \PYG{k}{for} \PYG{n}{a} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{)])}
+
+            \PYG{k}{if} \PYG{n+nb}{all}\PYG{p}{(}\PYG{n}{policy} \PYG{o}{==} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{p}{):}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy} \PYG{o}{=} \PYG{n}{policy}
+                \PYG{k}{break}
+
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy} \PYG{o}{=} \PYG{n}{policy}
+
+        \PYG{k}{return} \PYG{n}{policy}
+\end{Verbatim}

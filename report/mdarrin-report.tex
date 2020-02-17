@@ -1,0 +1,78 @@
+\documentclass[french, titlepage]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+\usepackage{babel}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[nottoc,numbib]{tocbibind}
+\usepackage{pdfpages}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fullpage}
+\usepackage{subfiles}
+
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{minted}
+
+\setminted{linenos}
+
+
+\input{macros}
+
+\title{RLD -- Rapport}
+
+\author{Maxime \textsc{Darrin}}
+
+\begin{document}
+	\maketitle
+
+	\tableofcontents
+	\newpage
+	
+	\section{TP 1 -- Bandits multi-bras} 
+	\subfile{bandits.tex}
+
+	\section{TP 2 -- Programmation dynamique}
+
+	\subfile{prog_dyn.tex}
+
+	\section{TP 3 -- Q Learning}
+
+	\subfile{qlearning.tex}
+
+	\section{TP 4 -- Deep Q Learning}
+
+	\subfile{dql.tex}
+
+	\section{TP 5 -- Policy Gradient}
+
+	\subfile{policy_gradient.tex}
+
+	\section{TP 6 -- PPO}
+	
+	\subfile{ppo.tex}
+
+	\section{TP 7 -- DDPG}
+	
+	\subfile{ddpg.tex}
+
+	\section{TP 8 -- MADDPG}
+
+	\subfile{maddpg.tex}
+
+	\section{TP 9 -- Generative Adversarial Networks}
+
+	\subfile{gan.tex}
+
+	\section{TP 10 -- Variational Autoencoders}
+
+	\subfile{vae.tex}
+
+
+
+
+
+	
+\end{document}

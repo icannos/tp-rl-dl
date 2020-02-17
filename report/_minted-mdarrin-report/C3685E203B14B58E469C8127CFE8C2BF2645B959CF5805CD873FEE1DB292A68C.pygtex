@@ -1,0 +1,52 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k}{def} \PYG{n+nf}{batch\PYGZus{}training}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{trajectory}\PYG{p}{):}
+        \PYG{n}{Y} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{n}{X} \PYG{o}{=} \PYG{p}{[]}
+        \PYG{n}{cumulative\PYGZus{}reward} \PYG{o}{=} \PYG{l+m+mi}{0}
+
+        \PYG{n}{traj} \PYG{o}{=} \PYG{n}{copy}\PYG{p}{(}\PYG{n}{trajectory}\PYG{p}{)}
+        \PYG{n}{traj}\PYG{o}{.}\PYG{n}{reverse}\PYG{p}{()}
+
+        \PYG{k}{for} \PYG{n}{state}\PYG{p}{,} \PYG{n}{action}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n}{traj}\PYG{p}{:}
+            \PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{done}\PYG{p}{:}
+                \PYG{n}{cumulative\PYGZus{}reward} \PYG{o}{=} \PYG{n}{reward} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{gamma} \PYG{o}{*} \PYG{n}{cumulative\PYGZus{}reward}
+            \PYG{k}{else}\PYG{p}{:}
+                \PYG{n}{cumulative\PYGZus{}reward} \PYG{o}{=} \PYG{n}{reward}
+
+            \PYG{n}{y} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{\PYGZhy{}}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{alpha}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{V}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}\PYG{o}{.}\PYG{n}{detach}\PYG{p}{()}\PYG{o}{.}\PYG{n}{numpy}\PYG{p}{()} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{alpha} \PYG{o}{*} \PYG{n}{cumulative\PYGZus{}reward}
+
+            \PYG{n}{X}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}
+            \PYG{n}{Y}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{y}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{update\PYGZus{}value\PYGZus{}function}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,} \PYG{n}{Y}\PYG{p}{)}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+
+        \PYG{n}{logpi} \PYG{o}{=} \PYG{o}{\PYGZhy{}} \PYG{n+nb}{sum}\PYG{p}{(}\PYG{n}{torch}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)[}\PYG{n}{action}\PYG{p}{])} \PYG{o}{*}
+			\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{advantage\PYGZus{}function}\PYG{p}{(}\PYG{n}{reward}\PYG{p}{,} \PYG{n}{state}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{)}
+                    \PYG{k}{for} \PYG{n}{state}\PYG{p}{,} \PYG{n}{action}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{,} \PYG{n}{done} \PYG{o+ow}{in} \PYG{n}{traj}\PYG{p}{)} \PYG{o}{/} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{traj}\PYG{p}{)}
+
+        \PYG{n}{logpi}\PYG{o}{.}\PYG{n}{backward}\PYG{p}{()}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy\PYGZus{}optimizer}\PYG{o}{.}\PYG{n}{step}\PYG{p}{()}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy\PYGZus{}optimizer}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+
+    \PYG{k}{def} \PYG{n+nf}{update\PYGZus{}policy}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{state}\PYG{p}{,} \PYG{n}{action}\PYG{p}{,} \PYG{n}{reward}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{):}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+
+        \PYG{n}{logpi} \PYG{o}{=} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{log}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)[}\PYG{n}{action}\PYG{p}{])}
+        \PYG{n}{logpi}\PYG{o}{.}\PYG{n}{backward}\PYG{p}{()}
+
+        \PYG{n}{A} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{advantage\PYGZus{}function}\PYG{p}{(}\PYG{n}{reward}\PYG{p}{,} \PYG{n}{state}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{p} \PYG{o+ow}{in} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{o}{.}\PYG{n}{parameters}\PYG{p}{():}
+            \PYG{n}{p}\PYG{o}{.}\PYG{n}{grad} \PYG{o}{*=} \PYG{o}{\PYGZhy{}} \PYG{n}{A}
+
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy\PYGZus{}optimizer}\PYG{o}{.}\PYG{n}{step}\PYG{p}{()}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy\PYGZus{}optimizer}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{policy}\PYG{o}{.}\PYG{n}{zero\PYGZus{}grad}\PYG{p}{()}
+
+    \PYG{k}{def} \PYG{n+nf}{advantage\PYGZus{}function}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{state}\PYG{p}{,} \PYG{n}{next\PYGZus{}state}\PYG{p}{):}
+        \PYG{k}{return} \PYG{n}{r} \PYG{o}{+} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{gamma}\PYG{o}{*}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{V}\PYG{p}{(}\PYG{n}{next\PYGZus{}state}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{V}\PYG{p}{(}\PYG{n}{state}\PYG{p}{)}
+\end{Verbatim}

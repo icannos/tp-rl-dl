@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+    \PYG{k}{def} \PYG{n+nf}{updateQ}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{,} \PYG{n}{rt}\PYG{p}{,} \PYG{n}{stp}\PYG{p}{,} \PYG{n}{alpha}\PYG{o}{=}\PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{n}{gamma}\PYG{o}{=}\PYG{l+m+mf}{0.9}\PYG{p}{,} \PYG{n}{alphar}\PYG{o}{=}\PYG{l+m+mf}{0.8}\PYG{p}{):}
+
+        \PYG{n}{st} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{state\PYGZus{}dict}\PYG{p}{[}\PYG{n}{st}\PYG{o}{.}\PYG{n}{dumps}\PYG{p}{()]}
+        \PYG{n}{stp} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{state\PYGZus{}dict}\PYG{p}{[}\PYG{n}{stp}\PYG{o}{.}\PYG{n}{dumps}\PYG{p}{()]}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{alpha}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]} \PYG{o}{+} \PYG{n}{alpha} \PYG{o}{*} \PYG{p}{(}\PYG{n}{rt} \PYG{o}{+} \PYG{n}{gamma} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{stp}\PYG{p}{,} \PYG{p}{:]))}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{R}\PYG{p}{[}\PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{,} \PYG{n}{stp}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{alphar}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{R}\PYG{p}{[}\PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{,} \PYG{n}{stp}\PYG{p}{]} \PYG{o}{+} \PYG{n}{alphar} \PYG{o}{*} \PYG{n}{rt}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{stp}\PYG{p}{,} \PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{alphar}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{stp}\PYG{p}{,} \PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]} \PYG{o}{+} \PYG{n}{alphar}
+
+        \PYG{k}{for} \PYG{n}{s} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{states}\PYG{p}{)} \PYG{o}{+} \PYG{l+m+mi}{1}\PYG{p}{):}
+            \PYG{k}{if} \PYG{n}{s} \PYG{o}{!=} \PYG{n}{stp}\PYG{p}{:}
+                \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{,} \PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{alphar}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{s}\PYG{p}{,} \PYG{n}{st}\PYG{p}{,} \PYG{n}{at}\PYG{p}{]}
+
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P} \PYG{o}{=} \PYG{n}{softmax}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{)}
+
+        \PYG{n}{states} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{state\PYGZus{}dict}\PYG{o}{.}\PYG{n}{values}\PYG{p}{())}
+
+        \PYG{n}{s} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{choice}\PYG{p}{(}\PYG{n}{states}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{k}\PYG{p}{))}
+        \PYG{n}{a} \PYG{o}{=} \PYG{n+nb}{list}\PYG{p}{(}\PYG{n}{np}\PYG{o}{.}\PYG{n}{random}\PYG{o}{.}\PYG{n}{choice}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{k}\PYG{p}{))}
+
+        \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{k}\PYG{p}{):}
+            \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{=} \PYG{p}{(}\PYG{l+m+mi}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{alpha}\PYG{p}{)} \PYG{o}{*} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{+} \PYG{n}{alpha} \PYG{o}{*} \PYGZbs{}
+                                 \PYG{p}{(}\PYG{n+nb}{sum}\PYG{p}{([}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{P}\PYG{p}{[}\PYG{n}{sp}\PYG{p}{,} \PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]]} \PYG{o}{*} \PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{R}\PYG{p}{[}\PYG{n}{s}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{a}\PYG{p}{[}\PYG{n}{i}\PYG{p}{],} \PYG{n}{sp}\PYG{p}{]} \PYG{o}{+}
+                                                                 \PYG{n}{gamma} \PYG{o}{*} \PYG{n}{np}\PYG{o}{.}\PYG{n}{max}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{Q}\PYG{p}{[}\PYG{n}{sp}\PYG{p}{,} \PYG{p}{:]))}
+                                       \PYG{k}{for} \PYG{n}{sp} \PYG{o+ow}{in} \PYG{n}{s}\PYG{p}{]))}
+\end{Verbatim}

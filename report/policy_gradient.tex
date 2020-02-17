@@ -1,0 +1,72 @@
+\documentclass{standalone}
+
+\begin{minted}{python}
+    def batch_training(self, trajectory):
+        Y = []
+        X = []
+        cumulative_reward = 0
+
+        traj = copy(trajectory)
+        traj.reverse()
+
+        for state, action, reward, next_state, done in traj:
+            if not done:
+                cumulative_reward = reward + self.gamma * cumulative_reward
+            else:
+                cumulative_reward = reward
+
+            y = (1-self.alpha) * self.V(state).detach().numpy() + self.alpha * cumulative_reward
+
+            X.append(state)
+            Y.append(y)
+
+        self.update_value_function(X, Y)
+
+        self.policy.zero_grad()
+
+        logpi = - sum(torch.log(self.policy(state)[action]) * 
+			self.advantage_function(reward, state, next_state)
+                    for state, action, reward, next_state, done in traj) / len(traj)
+
+        logpi.backward()
+
+        self.policy_optimizer.step()
+        self.policy_optimizer.zero_grad()
+        self.policy.zero_grad()
+
+    def update_policy(self, state, action, reward, next_state):
+        self.policy.zero_grad()
+
+        logpi = torch.log(self.policy(state)[action])
+        logpi.backward()
+
+        A = self.advantage_function(reward, state, next_state)
+        for p in self.policy.parameters():
+            p.grad *= - A
+
+
+        self.policy_optimizer.step()
+        self.policy_optimizer.zero_grad()
+        self.policy.zero_grad()
+
+    def advantage_function(self, r, state, next_state):
+        return r + self.gamma*self.V(next_state) - self.V(state)
+\end{minted}
+
+\begin{figure}[!ht]
+	\center
+	\includegraphics[scale=0.7]{img/a2c-CartPole-v1-long.png}
+	\caption{A2C avec et sans batch sur cartpole}
+	\label{pg:a2c}
+\end{figure}
+
+
+\begin{figure}[!ht]
+	\center
+	\includegraphics[scale=0.7]{img/a2c-LunarLander-v2-long.png}
+	\caption{A2C avec et sans batch sur LunarLander}
+	\label{pg:a2c_lunar}
+\end{figure}
+
+\begin{document}
+\end{document}
